@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>EditarProductLine</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+		<servlet-name>LineaProductos</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.LineaProducto</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdateProductLine</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdateProductLine</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>RemoveProductLine</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.RemoveProductLine</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>InsertProductLine</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InsertProductLine</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LineaProductos</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateProductLine</servlet-name>
+		<url-pattern>/Update</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>RemoveProductLine</servlet-name>
+		<url-pattern>/Remove</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>InsertProductLine</servlet-name>
+		<url-pattern>/Insert</url-pattern>
+	</servlet-mapping>
+</web-app>
