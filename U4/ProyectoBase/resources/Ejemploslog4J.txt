@@ -1,0 +1,10 @@
+#usar logger en cada clase
+final static Logger logger = Logger.getLogger(MiClase.class);
+
+logger.info("mensaje [MiClase.class]");
+
+logger.warn("mensaje [MiClase.class]");
+
+logger.error("mensaje [MiClase.class]");
+
+logger.fatal("mensaje [MiClase.class]");

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>ProyectoBase</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <resource-ref>
+		<description>Pool conexiones MariaDB</description>
+		<res-ref-name>jdbc/ConexionMariadb</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	
+	
+	<session-config>
+          <session-timeout>5</session-timeout>
+     </session-config>
+	
+	<servlet>
+		<servlet-name>Inicio</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InicioServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>AdminInicio</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.AdminInicioServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>Registro</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.RegistroServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.LogoutServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdateProducts</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdateProductServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>InicioPayments</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InicioPaymentsServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdatePayments</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdatePaymentsServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>InicioOffices</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InicioOfficesServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdateOffices</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdateOfficesServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>InicioCustomers</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InicioCustomersServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdateCustomers</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdateCustomerServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>InicioProductLine</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InicioProductLineServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdateProductLine</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdateProductLineServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>InicioEmployees</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InicioEmployeesServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdateEmployees</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdateEmployeeServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>InicioOrders</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InicioOrdersServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdateOrder</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdateOrderServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>InicioOrderDetails</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.InicioOrderDetailsServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UpdateOrderDetails</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.UpdateOrderDetailsServlet</servlet-class>
+	</servlet>
+	
+
+	<servlet-mapping>
+		<servlet-name>Inicio</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AdminInicio</servlet-name>
+		<url-pattern>/Admin/Incio</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Registro</servlet-name>
+		<url-pattern>/Registro</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/Logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateProducts</servlet-name>
+		<url-pattern>/UpdateProducts</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>InicioPayments</servlet-name>
+		<url-pattern>/InicioPayments</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdatePayments</servlet-name>
+		<url-pattern>/UpdatePayments</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>InicioOffices</servlet-name>
+		<url-pattern>/InicioOffices</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateOffices</servlet-name>
+		<url-pattern>/UpdateOffices</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>InicioCustomers</servlet-name>
+		<url-pattern>/InicioCustomers</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateCustomers</servlet-name>
+		<url-pattern>/UpdateCustomers</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>InicioProductLine</servlet-name>
+		<url-pattern>/InicioProductLine</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateProductLine</servlet-name>
+		<url-pattern>/UpdateProductLine</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>InicioEmployees</servlet-name>
+		<url-pattern>/InicioEmployees</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateEmployees</servlet-name>
+		<url-pattern>/UpdateEmployees</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>InicioEmployees</servlet-name>
+		<url-pattern>/InicioEmployees</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateOrder</servlet-name>
+		<url-pattern>/UpdateOrder</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>InicioOrderDetails</servlet-name>
+		<url-pattern>/InicioOrderDetails</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateOrderDetails</servlet-name>
+		<url-pattern>/UpdateOrderDetails</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/img/*</url-pattern>
+		<url-pattern>/css/*</url-pattern>
+		<url-pattern>/js/*</url-pattern>
+	</servlet-mapping>
+  
+</web-app>
