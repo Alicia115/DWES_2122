@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="include/bootstrap.jsp" />
-<title>Main</title>
+<fmt:setBundle basename="interface" />  
+<title>Home</title>
 </head>
 <body>
 	<div class="container mt-5">
