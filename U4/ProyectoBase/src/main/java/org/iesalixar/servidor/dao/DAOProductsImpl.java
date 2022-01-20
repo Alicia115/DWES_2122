@@ -114,8 +114,33 @@ public class DAOProductsImpl implements DAOProducts{
 
 	@Override
 	public boolean removeProduct(String productName) {
-		// TODO Auto-generated method stub
-		return false;
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "delete from products where productName = ?";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setString(1, productName);
+
+			resultado = statement.executeUpdate(sql);
+
+			
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
 	}
 
 	@Override
@@ -159,8 +184,41 @@ public class DAOProductsImpl implements DAOProducts{
 
 	@Override
 	public boolean insertProduct(Products product) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "insert into products values(?,?,?,?,?,?,?,?,?)";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setString(1,product.getProductCode());
+			statement.setString(2,product.getProductName());
+			statement.setString(3,product.getProductLine());
+			statement.setString(4,product.getProductScale());
+			statement.setString(5,product.getProductVendor());
+			statement.setString(6,product.getProductDescription());
+			statement.setInt(7, product.getQuantityInStock());
+			statement.setDouble(8, product.getBuyPrice());
+			statement.setDouble(9, product.getMsrp());
+
+			resultado = statement.executeUpdate();
+
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
 	}
 
 	@Override

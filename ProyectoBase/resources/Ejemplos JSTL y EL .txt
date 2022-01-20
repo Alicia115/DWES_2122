@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+#con este import se traduce
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+
+#usar bucles y condiciones
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<fmt:setBundle basename="interface" />  
+
+#########################################################################
+#if sin else
+<c:if test="${condicion}">
+	datos 
+</c:if> 
+
+
+#if con else
+<c:choose>
+	<c:when test="${condicion}">
+		datos IF
+	</c:when>
+	
+	<c:otherWise>
+		Datos ELSE
+	</c:otherWise>
+</c:choose>
+
+
+#foreach
+
+<c:foreach items="${variable}">
+	<c:out value="${parameter}">

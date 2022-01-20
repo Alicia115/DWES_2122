@@ -65,7 +65,7 @@ public class InicioServlet extends HttpServlet {
 					sesion.setAttribute("role", user.getRol());
 					
 					if ("admin".equals(user.getRol())) {
-						response.sendRedirect("InicioOrdersServlet");
+						response.sendRedirect("InicioEmployeesServlet");
 					} else {
 						response.sendRedirect(request.getContextPath());
 					}

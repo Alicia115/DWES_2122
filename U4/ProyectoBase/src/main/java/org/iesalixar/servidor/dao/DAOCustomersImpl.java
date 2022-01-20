@@ -159,14 +159,75 @@ public class DAOCustomersImpl implements DAOCustomers{
 
 	@Override
 	public boolean removeCustomer(int customerNumber) {
-		// TODO Auto-generated method stub
-		return false;
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "delete from customers where customerNumber = ?";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setInt(1, customerNumber);
+
+			resultado = statement.executeUpdate(sql);
+
+			
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
 	}
 
 	@Override
 	public boolean createCustomer(Customers customer) {
-		// TODO Auto-generated method stub
-		return false;
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "insert into customers values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setInt(1,customer.getCustomerNumber());
+			statement.setString(2,customer.getCustomerName());
+			statement.setString(3,customer.getContactFirstName());
+			statement.setString(4,customer.getContactLastName());
+			statement.setString(5,customer.getPhone());
+			statement.setString(6,customer.getAddressLine1());
+			statement.setString(7,customer.getAddressLine2());
+			statement.setString(8,customer.getCity());
+			statement.setString(9,customer.getState());
+			statement.setString(10,customer.getPostalCode());
+			statement.setString(11,customer.getCountry());
+			statement.setInt(12,customer.getSalesRepEmployeeNumber());
+			statement.setDouble(13, customer.getCreditLimit());
+
+			resultado = statement.executeUpdate();
+
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
 	}
 	
 

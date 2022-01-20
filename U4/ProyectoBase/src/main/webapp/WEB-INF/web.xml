@@ -194,8 +194,8 @@
 	</servlet-mapping>
 	
 	<servlet-mapping>
-		<servlet-name>InicioEmployees</servlet-name>
-		<url-pattern>/InicioEmployees</url-pattern>
+		<servlet-name>InicioOrders</servlet-name>
+		<url-pattern>/InicioOrders</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

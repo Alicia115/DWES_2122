@@ -143,14 +143,70 @@ public class DAOEmployeesImpl implements DAOEmployees{
 
 	@Override
 	public boolean removeEmployee(int employeeNumber) {
-		// TODO Auto-generated method stub
-		return false;
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "delete from employees where employeeNumber = ?";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setInt(1, employeeNumber);
+
+			resultado = statement.executeUpdate(sql);
+
+			
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
 	}
 
 	@Override
 	public boolean createEmployee(Employees employee) {
-		// TODO Auto-generated method stub
-		return false;
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "insert into employees values(?,?,?,?,?,?,?,?)";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setString(2, employee.getLastName());
+			statement.setString(3, employee.getFirstName());
+			statement.setString(4, employee.getExtension());
+			statement.setString(5, employee.getEmail());
+			statement.setString(6, employee.getOfficeCode());
+			statement.setInt(7, employee.getReportsTo());
+			statement.setString(8, employee.getJobTitle());
+			statement.setInt(1, employee.getEmployeeNumber());
+
+			resultado = statement.executeUpdate();
+
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
 	}
 
 

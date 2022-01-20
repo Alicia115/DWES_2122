@@ -134,13 +134,66 @@ public class DAOOrderDetailsImpl implements DAOOrderDetails{
 
 	@Override
 	public boolean removeOrderDetail(int orderNumber, String productCode) {
-		// TODO Auto-generated method stub
-		return false;
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "delete from orderdetails where orderNumber=? and productCode=?";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setInt(1, orderNumber);
+			statement.setString(2, productCode);
+
+			resultado = statement.executeUpdate();
+
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
 	}
 
 	@Override
 	public boolean createOrderDetail(OrderDetails office) {
-		// TODO Auto-generated method stub
-		return false;
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "insert into orderdetails values(?,?,?,?,?)";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setInt(3, office.getQuantityOrdered());
+			statement.setDouble(4, office.getPriceEach());
+			statement.setInt(5, office.getOrderLineNumber());
+			statement.setInt(1, office.getOrderNumber());
+			statement.setString(2, office.getProductCode());
+
+			resultado = statement.executeUpdate();
+
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
 	}
 }
