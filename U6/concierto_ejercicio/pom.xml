@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.iesalixar</groupId>
-	<artifactId>Formularios_Ejercicios</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Formularios_Ejercicios</name>
+	<artifactId>concierto_ejercicio</artifactId>
+	<version>0.0.1</version>
+	<name>concierto_ejercicio</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -51,8 +51,8 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<repositories>
+
+<repositories>
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
@@ -88,5 +88,4 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
-
 </project>
