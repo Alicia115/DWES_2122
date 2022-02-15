@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.iesalixar.dto.DepartamentoDTO;
 import org.iesalixar.dto.UsuarioDTO;
+import org.iesalixar.model.Alumno;
 import org.iesalixar.model.Departamento;
 import org.iesalixar.model.Usuario;
+import org.iesalixar.services.AlumnoServiceImpl;
 import org.iesalixar.services.AsignaturaServiceImpl;
 import org.iesalixar.services.DepartamentoServiceImpl;
 import org.iesalixar.services.UsuarioServiceImpl;
@@ -30,6 +32,9 @@ public class MainController {
 	@Autowired
 	AsignaturaServiceImpl asignaturaService;
 	
+	@Autowired
+	AlumnoServiceImpl alumnoService;
+	
 	@RequestMapping("/")
 	public String home(Model model) {
 		model.addAttribute("contenido","INICIO");
@@ -51,6 +56,17 @@ public class MainController {
 		model.addAttribute("departamentos",departamentos);
 		return "departments";
 	}
+	
+	@RequestMapping("/alumns")
+	public String alumnos (Model model) {
+		
+		List<Alumno> alumnos = alumnoService.getAllAlumnos();
+		
+		model.addAttribute("contenido","AlUMNOS");
+		model.addAttribute("alumnos",alumnos);
+		return "alumns";
+	}
+	
 	
 	@RequestMapping("/services")
 	public String services(Model model)  {

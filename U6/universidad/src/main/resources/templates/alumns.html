@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Alumns')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<h1>
+				Hola <span th:text="${contenido}"></span>
+			</h1>
+			<div class="col-8">
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+					<tr>
+						<th>ID</th>
+						<th>NIF</th>
+						<th>Nombre</th>
+						<th>Apellido1</th>
+						<th>Apellido2</th>
+						<th>Ciudad</th>
+						<th>Direccion</th>
+						<th>Telefono</th>
+						<th>Fecha Nacimiento</th>
+						<th>Edad</th>
+					</tr>
+					</thead>					
+					<tbody>
+					 <tr th:each="al : alumnos">
+					 	<td th:text="${al.getId()}"></td>
+					 	<td th:text="${al.getNif}"></td>
+					 	<td th:text="${al.getNombre()}"></td>
+					 	<td th:text="${al.getApellido1}"></td>
+					 	<td th:text="${al.getApellido2()}"></td>
+					 	<td th:text="${al.getCiudad()}"></td>
+					 	<td th:text="${al.getDireccion()}"></td>
+					 	<td th:text="${al.getTelefono()}"></td>
+					 	<td th:text="${al.getFecha_nacimiento()}"></td>
+					 	<td th:text="${al.getSexo()}"></td>
+					 </tr>					
+					</tbody>
+				</table>
+			</div>
+
+			<footer th:replace="fragments/parts::footer(info='menu.alumns')"></footer>
+		</div>
+	</div>
+</body>
+</html>

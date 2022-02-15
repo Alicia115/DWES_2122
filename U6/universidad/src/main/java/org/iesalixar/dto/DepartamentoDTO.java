@@ -1,6 +1,10 @@
 package org.iesalixar.dto;
 
-public class DepartamentoDTO {
+import java.io.Serializable;
+
+import java.io.Serializable;
+
+public class DepartamentoDTO implements Serializable {
 
 	private String nombre;
 

@@ -1,6 +1,8 @@
 package org.iesalixar.dto;
 
-public class UsuarioDTO {
+import java.io.Serializable;
+
+public class UsuarioDTO implements Serializable{
 	
 	private String usuario;
 	private String nombre;
