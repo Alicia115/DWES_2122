@@ -57,6 +57,22 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 		return null;
 	}
 
+	@Override
+	public Departamento actualizarDepartamento(Departamento departamento) {
+
+		if (departamento==null || departamento.getId() ==null || departamento.getNombre()==null) {
+			return null;
+		}
+		
+		return departamentoRepo.save(departamento); 
+	}
+
+	@Override
+	public Departamento findDepartamentoById(Long id) {
+		
+		return departamentoRepo.findById(id).get();
+	}
+
 	
 	
 }
