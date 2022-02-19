@@ -52,9 +52,9 @@ public class GradoServiceImpl implements GradoService{
 	}
 
 	@Override
-	public Optional<Grado> findGradoById(Long id) {
+	public Grado findGradoById(Long id) {
 		if(id!=null) {
-			return gradoRepo.findById(id);
+			return gradoRepo.findById(id).get();
 		}else {
 			return null;
 		}
