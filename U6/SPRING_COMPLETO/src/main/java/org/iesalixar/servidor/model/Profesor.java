@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -55,12 +56,12 @@ public class Profesor implements Serializable{
 	private String sexo;
 	
 	@ManyToOne
+	@JoinColumn(name = "id_departamento")
 	private Departamento departamento;
-	
+
 	@OneToMany(mappedBy="profesor", cascade = CascadeType.ALL,
 			orphanRemoval = true)
 	private Set<Asignatura> asignaturas = new HashSet<>();
-
 	
 	public Profesor() {
 		
@@ -166,7 +167,6 @@ public class Profesor implements Serializable{
 		this.sexo = sexo;
 	}
 
-
 	public Departamento getDepartamento() {
 		return departamento;
 	}
@@ -184,14 +184,13 @@ public class Profesor implements Serializable{
 	public void setAsignaturas(Set<Asignatura> asignaturas) {
 		this.asignaturas = asignaturas;
 	}
-	
+
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(apellido1, apellido2, asignaturas, ciudad, departamento, direccion, fechaNacimiento, id,
-				nif, nombre, sexo, telefono);
+		return Objects.hash(apellido1, apellido2, ciudad, direccion, fechaNacimiento, id, nif, nombre, sexo, telefono);
 	}
-
+	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -203,31 +202,29 @@ public class Profesor implements Serializable{
 			return false;
 		Profesor other = (Profesor) obj;
 		return Objects.equals(apellido1, other.apellido1) && Objects.equals(apellido2, other.apellido2)
-				&& Objects.equals(asignaturas, other.asignaturas) && Objects.equals(ciudad, other.ciudad)
-				&& Objects.equals(departamento, other.departamento) && Objects.equals(direccion, other.direccion)
+				&& Objects.equals(ciudad, other.ciudad) && Objects.equals(direccion, other.direccion)
 				&& Objects.equals(fechaNacimiento, other.fechaNacimiento) && Objects.equals(id, other.id)
 				&& Objects.equals(nif, other.nif) && Objects.equals(nombre, other.nombre)
 				&& Objects.equals(sexo, other.sexo) && Objects.equals(telefono, other.telefono);
 	}
 	
-		//Métodos HELPERs	
-			public void addAsignatura(Asignatura asginatura)  {
-				this.asignaturas.add(asginatura);
-				asginatura.setProfesor(this);
-			}
-			
-			public void removeAsignatura(Asignatura asginatura) {
-				this.asignaturas.remove(asginatura);
-				asginatura.setProfesor(null);
-			}
+	//Métodos HELPERs	
+	public void addAsignatura(Asignatura asginatura)  {
+		this.asignaturas.add(asginatura);
+		asginatura.setProfesor(this);
+	}
+	
+	public void removeAsignatura(Asignatura asginatura) {
+		this.asignaturas.remove(asginatura);
+		asginatura.setProfesor(null);
+	}
 
 
 	@Override
 	public String toString() {
 		return "Profesor [id=" + id + ", nif=" + nif + ", nombre=" + nombre + ", apellido1=" + apellido1
 				+ ", apellido2=" + apellido2 + ", ciudad=" + ciudad + ", direccion=" + direccion + ", telefono="
-				+ telefono + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + ", departamento="
-				+ departamento + "]";
+				+ telefono + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + "]";
 	}
 
 }

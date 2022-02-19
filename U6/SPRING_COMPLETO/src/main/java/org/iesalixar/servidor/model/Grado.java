@@ -28,7 +28,7 @@ public class Grado implements Serializable{
 	@OneToMany(mappedBy="grado", cascade = CascadeType.ALL,
 			orphanRemoval = true)
 	private Set<Asignatura> asignaturas = new HashSet<>();
-
+	
 	public Grado() {
 	
 	}
@@ -74,16 +74,15 @@ public class Grado implements Serializable{
 		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre);
 	}
 	
-	//Métodos HELPERs	
-			public void addAsignatura(Asignatura asignatura)  {
-				this.asignaturas.add(asignatura);
-				asignatura.setGrado(this);
-			}
-			
-			public void removeAsignatura(Asignatura asginatura) {
-				this.asignaturas.remove(asginatura);
-				asginatura.setGrado(null);
-			}
+	public void addAsignatura(Asignatura asginatura)  {
+		this.asignaturas.add(asginatura);
+		asginatura.setGrado(this);
+	}
+	
+	public void removeAsignatura(Asignatura asginatura) {
+		this.asignaturas.remove(asginatura);
+		asginatura.setGrado(null);
+	}
 
 	@Override
 	public String toString() {

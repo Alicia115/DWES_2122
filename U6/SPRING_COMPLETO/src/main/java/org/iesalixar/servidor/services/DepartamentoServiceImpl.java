@@ -70,9 +70,13 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 	@Override
 	public Departamento findDepartamentoById(Long id) {
 		
-		return departamentoRepo.findById(id).get();
+		if(id != null) {
+			
+			return departamentoRepo.findById(id).get();
+			
+		}
+		
+		return null;
 	}
-
-	
 	
 }

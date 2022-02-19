@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.iesalixar.servidor.model.Asignatura;
+import org.iesalixar.servidor.model.Departamento;
 import org.iesalixar.servidor.repository.AsignaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,40 @@ public class AsignaturaServiceImpl implements AsignaturaService {
 		
 		return asignatura;
 		
+	}
+
+	@Override
+	public Asignatura getAsignaturaByName(String nombre) {
+		
+		if (nombre!=null) {
+			
+			Asignatura asig = asignaturaRepo.findByNombre(nombre);
+			
+			return asig; 			
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Asignatura insertarAsignatura(Asignatura asignatura) {
+		
+		if (asignatura!=null && getAsignaturaByName(asignatura.getNombre())==null) {
+			Asignatura asig = asignaturaRepo.save(asignatura);
+			return asig;
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Asignatura actualizarAsignatura(Asignatura asignatura) {
+		
+		if (asignatura==null || asignatura.getId() ==null || asignatura.getNombre()==null) {
+			return null;
+		}
+		
+		return asignaturaRepo.save(asignatura); 
 	}
 
 }

@@ -11,5 +11,5 @@ public interface DepartamentoService {
 	public Departamento insertarDepartamento(Departamento departamento);
 	public Departamento actualizarDepartamento(Departamento departamento);
 	public Departamento findDepartamentoById(Long id);
-
+	
 }

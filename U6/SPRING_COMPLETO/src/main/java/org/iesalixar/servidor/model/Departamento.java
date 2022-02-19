@@ -47,6 +47,7 @@ public class Departamento {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 
 	public Set<Profesor> getProfesores() {
 		return profesores;
@@ -56,10 +57,9 @@ public class Departamento {
 		this.profesores = profesores;
 	}
 
-	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, nombre, profesores);
+		return Objects.hash(id, nombre);
 	}
 
 	@Override
@@ -71,24 +71,25 @@ public class Departamento {
 		if (getClass() != obj.getClass())
 			return false;
 		Departamento other = (Departamento) obj;
-		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(profesores, other.profesores);
+		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre);
 	}
-
-		//Métodos HELPERs	
-		public void addProfesor(Profesor profesor)  {
-			this.profesores.add(profesor);
-			profesor.setDepartamento(this);
-		}
-		
-		public void removeProfesor(Profesor profesor) {
-			this.profesores.remove(profesor);
-			profesor.setDepartamento(null);
-		}
+	
+	
+	//Métodos HELPERs	
+			public void addProfesor(Profesor profesor)  {
+				this.profesores.add(profesor);
+				profesor.setDepartamento(this);
+			}
+			
+			public void removeProfesor(Profesor profesor) {
+				this.profesores.remove(profesor);
+				profesor.setDepartamento(null);
+			}
+	
 
 	@Override
 	public String toString() {
-		return "Departamento [id=" + id + ", nombre=" + nombre + ", profesores=" + profesores + "]";
+		return "Departamento [id=" + id + ", nombre=" + nombre + "]";
 	}
 	
 	
