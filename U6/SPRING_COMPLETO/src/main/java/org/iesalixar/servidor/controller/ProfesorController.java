@@ -3,6 +3,8 @@ package org.iesalixar.servidor.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.iesalixar.servidor.dto.DepartamentoDTO;
+import org.iesalixar.servidor.dto.ProfesorDTO;
 import org.iesalixar.servidor.model.Departamento;
 import org.iesalixar.servidor.model.Profesor;
 import org.iesalixar.servidor.services.ProfesorServiceImpl;
@@ -49,7 +51,32 @@ public class ProfesorController {
 		return "redirect:/profesores";
 	}
 
+	@GetMapping("/add")
+	public String addProfesorGet(@RequestParam(required=false,name="error") String error,
+			@RequestParam(required=false,name="prof") String nombre,
+			Model model) {
+		
+		ProfesorDTO prof = new ProfesorDTO();
+		
+		model.addAttribute("prof", prof);
+		model.addAttribute("error", error);
+		model.addAttribute("previo", nombre);
+		return "addProfesor";
+	}
 	
+	
+	@PostMapping("/add")
+	public String addProfesorPost(@ModelAttribute ProfesorDTO prof,Model model) {
+		
+		Profesor profBD = new Profesor();
+		profBD.setNombre(prof.getNombre());
+		
+		if (profesorService.insertarProfesor(profBD)==null) {
+			return "redirect:/profesores/add?error=Existe&prof="+prof.getNombre();
+		}
+		
+		return "redirect:/profesores";
+	}
 	
 	
 }

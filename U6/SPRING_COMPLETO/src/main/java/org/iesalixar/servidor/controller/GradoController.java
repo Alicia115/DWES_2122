@@ -65,7 +65,7 @@ public class GradoController {
 		
 		
 		Grado grad = gradoService.findGradoById(Long.parseLong(grado));
-		model.addAttribute("grado", grado);
+		model.addAttribute("grado", grad);
 		return "editGrado";
 	}
 	

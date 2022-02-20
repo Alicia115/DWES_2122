@@ -6,10 +6,7 @@
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>
 			<div class="col-6">
-				<form th:action="@{/profesores/edit}" method="post"	th:object="${profesor}">
-					<label for="id" class="form-label mt-3">Id</label>
-					<input type="text" class="form-control" id="id" name="id"
-						th:field="*{id}" readonly>
+				<form th:action="@{/profesores/add}" method="post"	th:object="${prof}">
 					<label for="nif" class="form-label mt-3">NIF</label>
 					<input type="text" class="form-control" id="nif" name="nif"
 						th:field="*{nif}">
@@ -39,13 +36,12 @@
 						th:field="*{fechaNacimiento}" required>	
 					<label for="sexo" class="form-label mt-3">Sexo</label>
 					<input type="text" class="form-control" id="sexo" name="sexos"
-						th:field="*{sexo}" required>
-						
+						th:field="*{sexo}" required>						
 					<h6 class="text-danger" th:if="${error!=null}" th:text="${'Profesor existente'}"></h6>	
-					<input type="submit" class="btn btn-primary w-100 mt-3" value="ACTUALIZAR" />	
+					<input type="submit" class="btn btn-primary w-100 mt-3" value="AÑADIR" />	
 				</form>
 			</div>
-			<footer th:replace="fragments/parts::footer(info='menu.addprof')"></footer>
+			<footer th:replace="fragments/parts::footer(info='menu.addprofesor')"></footer>
 		</div>
 	</div>
 </body>
