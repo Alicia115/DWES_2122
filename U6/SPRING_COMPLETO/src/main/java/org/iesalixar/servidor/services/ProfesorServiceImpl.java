@@ -21,7 +21,8 @@ public class ProfesorServiceImpl implements ProfesorService{
 
 	@Override
 	public Profesor insertarProfesor(Profesor profesor) {
-		if(profesor !=null && profesor.getId()!= null) {
+		
+		if(profesor !=null && profesor.getId()== null) {
 			return profRepo.save(profesor);
 		}else {
 			return null;

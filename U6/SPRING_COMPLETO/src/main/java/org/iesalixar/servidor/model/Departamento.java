@@ -1,5 +1,6 @@
 package org.iesalixar.servidor.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="departamento")
-public class Departamento {
+public class Departamento implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +57,8 @@ public class Departamento {
 	public void setProfesores(Set<Profesor> profesores) {
 		this.profesores = profesores;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {

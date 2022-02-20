@@ -1,7 +1,7 @@
 package org.iesalixar.servidor.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -49,7 +49,6 @@ public class Profesor implements Serializable{
 	private String telefono;
 	
 	@Column(name="fecha_nacimiento",nullable=false)
-	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	
 	@Column(nullable=false,length=1)
@@ -184,13 +183,12 @@ public class Profesor implements Serializable{
 	public void setAsignaturas(Set<Asignatura> asignaturas) {
 		this.asignaturas = asignaturas;
 	}
-
-
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(apellido1, apellido2, ciudad, direccion, fechaNacimiento, id, nif, nombre, sexo, telefono);
+		return Objects.hash(id);
 	}
-	
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -201,13 +199,10 @@ public class Profesor implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Profesor other = (Profesor) obj;
-		return Objects.equals(apellido1, other.apellido1) && Objects.equals(apellido2, other.apellido2)
-				&& Objects.equals(ciudad, other.ciudad) && Objects.equals(direccion, other.direccion)
-				&& Objects.equals(fechaNacimiento, other.fechaNacimiento) && Objects.equals(id, other.id)
-				&& Objects.equals(nif, other.nif) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(sexo, other.sexo) && Objects.equals(telefono, other.telefono);
+		return Objects.equals(id, other.id);
 	}
-	
+
+
 	//Métodos HELPERs	
 	public void addAsignatura(Asignatura asginatura)  {
 		this.asignaturas.add(asginatura);

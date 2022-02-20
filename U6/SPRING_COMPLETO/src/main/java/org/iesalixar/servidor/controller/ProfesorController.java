@@ -7,6 +7,7 @@ import org.iesalixar.servidor.dto.DepartamentoDTO;
 import org.iesalixar.servidor.dto.ProfesorDTO;
 import org.iesalixar.servidor.model.Departamento;
 import org.iesalixar.servidor.model.Profesor;
+import org.iesalixar.servidor.services.DepartamentoServiceImpl;
 import org.iesalixar.servidor.services.ProfesorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class ProfesorController {
 	@Autowired
 	ProfesorServiceImpl profesorService;
 	
+	@Autowired
+	DepartamentoServiceImpl departService;
+	
 	@GetMapping("/")
 	public String profesores(Model model) {
 
@@ -35,9 +39,10 @@ public class ProfesorController {
 	
 	@GetMapping("/edit")
 	public String editProf(@RequestParam(name="prof") String prof,Model model) {
-		
+		List<Departamento> departamentos = departService.getAllDepartments();
 		Optional<Profesor> profesor = profesorService.findProfesorById(Long.parseLong(prof));
-		model.addAttribute("profesor", profesor);
+		model.addAttribute("profesor", profesor.get());
+		model.addAttribute("departamentos",departamentos);
 		return "editProfesor";
 	}
 	
@@ -48,7 +53,7 @@ public class ProfesorController {
 		if (profesorService.actualizarProfesor(prof)==null) {
 			return "redirect:/profedores/edit?error=error&prof"+prof.getId();
 		}
-		return "redirect:/profesores";
+		return "redirect:/profesores/";
 	}
 
 	@GetMapping("/add")
@@ -57,8 +62,10 @@ public class ProfesorController {
 			Model model) {
 		
 		ProfesorDTO prof = new ProfesorDTO();
+		List<Departamento> departamentos = departService.getAllDepartments();
 		
 		model.addAttribute("prof", prof);
+		model.addAttribute("departamentos",departamentos);
 		model.addAttribute("error", error);
 		model.addAttribute("previo", nombre);
 		return "addProfesor";
@@ -75,7 +82,7 @@ public class ProfesorController {
 			return "redirect:/profesores/add?error=Existe&prof="+prof.getNombre();
 		}
 		
-		return "redirect:/profesores";
+		return "redirect:/profesores/";
 	}
 	
 	
