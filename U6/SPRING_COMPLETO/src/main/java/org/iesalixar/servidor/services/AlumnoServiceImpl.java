@@ -45,7 +45,7 @@ public class AlumnoServiceImpl implements AlumnoService {
 	@Override
 	public Alumno insertarAlumno(Alumno alumno) {
 		
-		if (alumno!=null && alumno.getId()!= null) {
+		if (alumno!=null && alumno.getId()== null) {
 			Alumno alumn = alumnoRepo.save(alumno);
 			return alumn;
 		}
@@ -61,6 +61,14 @@ public class AlumnoServiceImpl implements AlumnoService {
 		}
 		
 		return alumnoRepo.save(alumno); 
+	}
+
+	@Override
+	public Alumno findAlumnoByNif(String nif) {
+		if(!nif.equals("") && nif!=null) {
+			return alumnoRepo.findByNif(nif);
+		}
+		return null;
 	}
 
 }

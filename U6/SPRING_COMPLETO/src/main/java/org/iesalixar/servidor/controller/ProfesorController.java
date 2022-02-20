@@ -1,5 +1,6 @@
 package org.iesalixar.servidor.controller;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,10 +52,11 @@ public class ProfesorController {
 	public String updateProf(@ModelAttribute Profesor prof) {
 		
 		if (profesorService.actualizarProfesor(prof)==null) {
-			return "redirect:/profedores/edit?error=error&prof"+prof.getId();
+			return "redirect:/profesores/edit?error=error&prof"+prof.getId();
 		}
 		return "redirect:/profesores/";
 	}
+	
 
 	@GetMapping("/add")
 	public String addProfesorGet(@RequestParam(required=false,name="error") String error,
@@ -75,11 +77,24 @@ public class ProfesorController {
 	@PostMapping("/add")
 	public String addProfesorPost(@ModelAttribute ProfesorDTO prof,Model model) {
 		
-		Profesor profBD = new Profesor();
-		profBD.setNombre(prof.getNombre());
-		
-		if (profesorService.insertarProfesor(profBD)==null) {
-			return "redirect:/profesores/add?error=Existe&prof="+prof.getNombre();
+		if(profesorService.findProfesorByNif(prof.getNif())==null) {
+			Profesor profBD = new Profesor();
+			profBD.setNif(prof.getNif());
+			profBD.setNombre(prof.getNombre());
+			profBD.setApellido1(prof.getApellido1());
+			profBD.setApellido2(prof.getApellido2());
+			profBD.setCiudad(prof.getCiudad());
+			profBD.setDireccion(prof.getDireccion());
+			profBD.setFechaNacimiento(prof.getFechaNacimiento());
+			profBD.setSexo(prof.getSexo());
+			profBD.setTelefono(prof.getTelefono());
+			profBD.setDepartamento(departService.findDepartamentoById((long) prof.getId_departamento()));
+			
+			if (profesorService.insertarProfesor(profBD)==null) {
+				return "redirect:/profesores/add?error=Existe&prof="+prof.getNombre();
+			}
+		}else {
+			return "redirect:/profesores/add?error=ExisteNif&prof="+prof.getNif();
 		}
 		
 		return "redirect:/profesores/";

@@ -47,5 +47,13 @@ public class ProfesorServiceImpl implements ProfesorService{
 			return null;
 		}
 	}
+
+	@Override
+    public Profesor findProfesorByNif(String nif) {
+        if(!nif.equals("") && nif!=null) {
+            return profRepo.findByNif(nif);
+        }
+        return null;
+    }
 	
 }

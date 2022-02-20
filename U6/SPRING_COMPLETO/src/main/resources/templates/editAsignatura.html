@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Edit Asignatura')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<div class="col-6">
+				<form th:action="@{/asignaturas/edit}" method="post"	th:object="${asignatura}">
+					<label for="id" class="form-label mt-3">Id</label>
+					<input type="text" class="form-control" id="id" name="id"
+						th:field="*{id}" readonly>
+					<label for="nombre" class="form-label mt-3" th:text="#{name}"></label>
+					<input type="text" class="form-control" id="nombre" name="nombre"
+						th:field="*{nombre}" required>	
+					<label for="creditos" class="form-label mt-3" th:text="#{credits}"></label>
+					<input type="text" class="form-control" id="creditos" name="creditos"
+						th:field="*{creditos}" required>
+					<label for="tipo" class="form-label mt-3" th:text="#{type}"></label>
+					<input type="text" class="form-control" id="tipo" name="tipo"
+						th:field="*{tipo}" required>		
+					<label for="curso" class="form-label mt-3" th:text="#{course}"></label>
+					<input type="text" class="form-control" id="curso" name="curso"
+						th:field="*{curso}" required>		
+						<label for="cuatrimestre" class="form-label mt-3" th:text="#{quarter}"></label>
+					<input type="text" class="form-control" id="cuatrimestre" name="cuatrimestre"
+						th:field="*{cuatrimestre}" required>
+					<label for="profesor" class="form-label mt-3" th:text="#{profesor}"></label>
+					<select name="profesor" class="form-select mt-3"  th:field="*{profesor}">
+                                <option th:each="p : ${profesores}" 
+                                th:value="${p.id} " 
+                                th:text="|${p.nombre} ${p.apellido1}|" 
+                               ></option>
+                    </select>
+                    <label for="grado" class="form-label mt-3" th:text="#{grade}"></label>
+                    <select name="grado" class="form-select mt-3"  th:field="*{grado}">
+                                <option th:each="g : ${grados}" 
+                                th:value="${g.id}" 
+                                th:text="${g.nombre}" 
+                               ></option>
+                    </select>				
+					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorSubject'}"></h6>	
+					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{update}"> </button>	
+				</form>
+			</div>
+			<footer th:replace="fragments/parts::footer(info='menu.editSubject')"></footer>
+		</div>
+	</div>
+</body>
+</html>

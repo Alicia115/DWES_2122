@@ -18,6 +18,8 @@
 				</li>
 				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/asignaturas/}" th:text="#{menu.subject}"></a>				
 				</li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/asignaturas/add}" th:text="#{menu.addSubject}"></a>				
+				</li>
 				<li sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white " th:href="@{/services}" th:text="#{menu.services}"></a>
 				</li>
 				<li  sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white" th:href="@{/about}" th:text="#{menu.about}"></a></li>

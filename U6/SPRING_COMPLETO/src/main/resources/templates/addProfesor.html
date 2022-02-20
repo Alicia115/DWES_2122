@@ -10,38 +10,40 @@
 					<label for="nif" class="form-label mt-3">NIF</label>
 					<input type="text" class="form-control" id="nif" name="nif"
 						th:field="*{nif}">
-					<label for="nombre" class="form-label mt-3">Nombre</label>
+					<label for="nombre" class="form-label mt-3" th:text="#{name}"></label>
 					<input type="text" class="form-control" id="nombre" name="nombre"
 						th:field="*{nombre}" required>	
-					<label for="apellido1" class="form-label mt-3">Apellido 1</label>
+					<label for="apellido1" class="form-label mt-3" th:text="#{firstName}"></label>
 					<input type="text" class="form-control" id="apellido1" name="apellido1"
 						th:field="*{apellido1}" required>
-					<label for="apellido2" class="form-label mt-3">Apellido 2</label>
+					<label for="apellido2" class="form-label mt-3" th:text="#{secondName}"></label>
 					<input type="text" class="form-control" id="apellido2" name="apellido2"
 						th:field="*{apellido2}" >		
-					<label for="ciudad" class="form-label mt-3">Ciudad</label>
+					<label for="ciudad" class="form-label mt-3" th:text="#{city}"></label>
 					<input type="text" class="form-control" id="ciudad" name="ciudad"
 						th:field="*{ciudad}" required>		
-					<label for="direccion" class="form-label mt-3">Direccion</label>
+					<label for="direccion" class="form-label mt-3 " th:text="#{direction}"></label>
 					<input type="text" class="form-control" id="direccion" name="direccion"
 						th:field="*{direccion}" required>
-					<label for="telefono" class="form-label mt-3">Telefono</label>
+					<label for="telefono" class="form-label mt-3" th:text="#{phoneNumber}"></label>
 					<input type="text" class="form-control" id="telefono" name="telefono"
 						th:field="*{telefono}" >	
-					<label for="fecha_nacimiento" class="form-label mt-3">Fecha Nacimiento</label>
-					<input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
+					<label for="fecha_nacimiento" class="form-label mt-3" th:text="#{dateBirthady}"> </label>
+					<input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
 						th:field="*{fechaNacimiento}" required>	
-					<label for="sexo" class="form-label mt-3">Sexo</label>
+					<label for="sexo" class="form-label mt-3" th:text="#{sex}"></label>
 					<input type="text" class="form-control" id="sexo" name="sexos"
 						th:field="*{sexo}" required>
-					<label for="departamentos" class="form-label mt-3">Departamento</label>
-					<select name="departamento" class="form-select mt-3">
-                        <th:block th:each="d : ${departamentos}">
-                                <option th:value="${d.getId()}" th:text="${d.getNombre()}" th:field="*{id_departamento}"></option>
-                        </th:block>
-					</select>					
-					<h6 class="text-danger" th:if="${error!=null}" th:text="${'Profesor existente'}"></h6>	
-					<input type="submit" class="btn btn-primary w-100 mt-3" value="AÑADIR" />	
+					<label for="departamento" class="form-label mt-3" th:text="#{department}"></label>
+					<select name="departamento" class="form-select mt-3"  th:field="*{id_departamento}">
+                                <option th:each="d : ${departamentos}" 
+                                th:value="${d.id}" 
+                                th:text="${d.nombre}" 
+                               ></option>
+                    </select>					
+					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorProfesor'}"></h6>	
+																<!--th:text="${'Profesor existente'}-->
+					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{add}"> </button>	
 				</form>
 			</div>
 			<footer th:replace="fragments/parts::footer(info='menu.addprofesor')"></footer>

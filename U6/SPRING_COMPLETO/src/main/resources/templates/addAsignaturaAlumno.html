@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Add Alumno')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<div class="col-6">
+				<form th:action="@{/asignaturas/addAlumno}" method="post"	th:object="${asig}">
+					<label for="alumno" class="form-label mt-3">Alumnos</label>
+					<select name="alumno" class="form-select mt-3"  th:field="*{alumnosAsignatura}">
+                                <option th:each="a : ${alumnos}" 
+                                th:value="${a.id} " 
+                                th:text="|${a.id} ${a.nombre} ${a.apellido1}|" 
+                               ></option>
+                    </select>				
+					<h6 class="text-danger" th:if="${error!=null}" th:text="${'Alumno existente'}"></h6>	
+					<input type="submit" class="btn btn-primary w-100 mt-3" value="AÑADIR" />	
+				</form>
+			</div>
+			<footer th:replace="fragments/parts::footer(info='menu.addAlumn')"></footer>
+		</div>
+	</div>
+</body>
+</html>

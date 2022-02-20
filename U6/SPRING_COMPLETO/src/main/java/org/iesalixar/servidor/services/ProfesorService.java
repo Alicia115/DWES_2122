@@ -12,5 +12,5 @@ public interface ProfesorService {
 	public Profesor insertarProfesor(Profesor profesor);
 	public Profesor actualizarProfesor(Profesor profesor);
 	public Optional<Profesor> findProfesorById(Long id);
-
+	public Profesor findProfesorByNif(String nif);
 }

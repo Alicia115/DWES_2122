@@ -1,7 +1,7 @@
 package org.iesalixar.servidor.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -47,7 +47,6 @@ public class Alumno implements Serializable {
 	private String telefono;
 	
 	@Column(name="fecha_nacimiento",nullable=false)
-	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	
 	@Column(nullable=false,length=1)

@@ -5,24 +5,24 @@
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>
 			<div class="row mt-3 justify-content-end">
-            	<a class="text-center col-2 btn btn-primary" th:href="@{/profesores/add}">Añadir Profesor</a>
+            	<a class="text-center col-2 btn btn-primary" th:href="@{/profesores/add}" th:text="#{addProfesor}"></a>
             </div>
 			<div class="col-8">
-				<h1 class="text-center">Lista de profesores</h1>
+				<h1 class="text-center" th:text="#{list.profesor}"></h1>
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 						<tr>
 							<th>ID</th>
 							<th>NIF</th>
-							<th>Nombre</th>
-							<th>Primer Apellido</th>
-							<th>Segundo Apellido</th>
-							<th>Direccion</th>
-							<th>Telefono</th>
-							<th>Fecha de Nacimiento</th>
-							<th>Ciudad</th>
-							<th>Sexo</th>
-							<th>Departamento</th>
+							<th th:text="#{name}"></th>
+							<th th:text="#{firstName}"></th>
+							<th th:text="#{secondName}"></th>
+							<th th:text="#{direction}"></th>
+							<th th:text="#{phoneNumber}"></th>
+							<th th:text="#{dateBirthady}"></th>
+							<th th:text="#{city}"></th>
+							<th th:text="#{sex}"></th>
+							<th th:text="#{department}"></th>
 							<th></th>
 						</tr>
 					</thead>

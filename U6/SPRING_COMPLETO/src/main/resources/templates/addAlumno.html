@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='Edit Profesor')"></head>
+<head th:replace="fragments/bootstrap::head(title='Add Alumno')"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>
 			<div class="col-6">
-				<form th:action="@{/profesores/edit}" method="post"	th:object="${profesor}">
-					<label for="id" class="form-label mt-3">Id</label>
-					<input type="text" class="form-control" id="id" name="id"
-						th:field="*{id}" readonly>
+				<form th:action="@{/alumnos/add}" method="post"	th:object="${alumn}">
 					<label for="nif" class="form-label mt-3">NIF</label>
 					<input type="text" class="form-control" id="nif" name="nif"
 						th:field="*{nif}">
@@ -36,19 +33,12 @@
 						th:field="*{fechaNacimiento}" required>	
 					<label for="sexo" class="form-label mt-3" th:text="#{sex}"></label>
 					<input type="text" class="form-control" id="sexo" name="sexos"
-						th:field="*{sexo}" required>
-					<label for="departamento" class="form-label mt-3" th:text="#{department}"></label>
-					<select name="departamento" class="form-select mt-3"  th:field="*{departamento}">
-                                <option th:each="d : ${departamentos}" 
-                                th:value="${d.id}" 
-                                th:text="${d.nombre}" 
-                               ></option>
-                    </select>	
-					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorProfesor'}"></h6>	
-					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{update}"> </button>	
+						th:field="*{sexo}" required>		
+					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorAlumn'}"></h6>	
+					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{add}"> </button>		
 				</form>
 			</div>
-			<footer th:replace="fragments/parts::footer(info='menu.addprof')"></footer>
+			<footer th:replace="fragments/parts::footer(info='menu.addalumno')"></footer>
 		</div>
 	</div>
 </body>

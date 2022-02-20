@@ -1,7 +1,7 @@
 package org.iesalixar.servidor.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class ProfesorDTO implements Serializable {
 	

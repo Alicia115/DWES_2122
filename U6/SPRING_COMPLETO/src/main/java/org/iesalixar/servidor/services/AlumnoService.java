@@ -13,4 +13,5 @@ public interface AlumnoService {
 	public Optional<Alumno> findAlumnoById(Long id);
 	public Alumno insertarAlumno(Alumno alumno);
 	public Alumno actualizarAlumno(Alumno alumno);
+	public Alumno findAlumnoByNif(String nif);
 }
