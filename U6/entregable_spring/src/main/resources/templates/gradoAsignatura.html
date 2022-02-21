@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='menu.subject')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>	
+			
+			<div class="col-8">
+				<h3 class="text-center mt-3" th:text=" ${grado.nombre}"></h3>
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+					<tr>
+						<th>ID</th>
+						<th th:text="#{name}"></th >
+						<th th:text="#{credits}"></th>
+						<th th:text="#{type}"></th>
+						<th > Curso</th>
+						<th> Cuatrimestre</th>
+						<th> Profesor</th>
+					</tr>
+					</thead>					
+					<tbody>
+					 <tr th:each="g : ${grado.getAsignaturas()}">
+					 	<td th:text="${g.id}"></td>
+					 	<td th:text="${g.nombre}"></td>
+					 	<td th:text="${g.creditos}"></td>
+					 	<td th:text="${g.tipo}"></td>
+					 	<td th:text="${g.curso}"></td>
+					 	<td th:text="${g.cuatrimestre}"> </td>
+					 	<td th:text="(${g.profesor} != null) ? |${g.profesor.nombre} ${g.profesor.apellido1}| : '' "> </td>
+					 </tr>					
+					</tbody>
+				</table>
+				<h6 class="text-danger" th:if="${error!=null}">Este Grado no tiene ninguna Asignatura</h6>
+			</div>
+
+			<footer th:replace="fragments/parts::footer(info='menu.subject')"></footer>
+		</div>
+	</div>
+</body>
+</html>

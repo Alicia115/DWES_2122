@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='menu.grados')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="row mt-3 justify-content-end">
+            	<a class="text-center col-2 btn btn-primary" th:href="@{/grados/addGrado}" th:text="#{menu.addgrados}"></a>
+            </div>		
+			<h1 class="text-center mt-3" th:text="#{menu.grados}"></h1>
+			<div class="col-8">
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+					<tr>
+						<th>ID</th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{menu.subjects}"></th>
+					</tr>
+					</thead>					
+					<tbody>
+					 <tr th:each="g : ${grados}">
+					 	<td th:text="${g.getId()}"></td>
+					 	<td th:text="${g.getNombre()}"></td>
+					 	<td><a th:href="@{'/grados/asignaturas?codigo='+${g.getId()}}"><i class="bi bi-eye-fill"></i></i></a></td>
+					 </tr>					
+					</tbody>
+				</table>
+			</div>
+
+			<footer th:replace="fragments/parts::footer(info='menu.grados')"></footer>
+		</div>
+	</div>
+</body>
+</html>
