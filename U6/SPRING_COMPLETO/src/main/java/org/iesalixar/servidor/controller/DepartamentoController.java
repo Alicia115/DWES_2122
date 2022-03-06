@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.iesalixar.servidor.dto.DepartamentoDTO;
 import org.iesalixar.servidor.model.Departamento;
+import org.iesalixar.servidor.model.Profesor;
 import org.iesalixar.servidor.services.DepartamentoServiceImpl;
+import org.iesalixar.servidor.services.ProfesorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class DepartamentoController {
 	
 	@Autowired
 	DepartamentoServiceImpl departamentoService;
+	
+	@Autowired
+	ProfesorServiceImpl profesorService;
 	
 	@RequestMapping("/departments")
 	public String departaments(Model model) {
@@ -76,6 +81,37 @@ public class DepartamentoController {
 	}
 	
 	
+	@GetMapping("/departments/profesores")
+	public String profesoresDepartamento(
+			@RequestParam(required=false,name="dpto") String dpto,
+			Model model) {
+		
+		Departamento dptoEntity = departamentoService.findDepartamentoById(Long.parseLong(dpto));
+		
+		if (dpto==null || dptoEntity == null) {
+			return "redirect:/departments";
+		}
+		
+		model.addAttribute("departamento", dptoEntity);		
+		
+		return "profesoresDepartment";
+	}
 	
+	
+	@GetMapping("/departments/profesor/delete")
+	public String borrarProfesorDepartamento(			
+			@RequestParam(required=false,name="prof") String prof,
+			Model model) {
+		
+		Profesor profEntity = profesorService.findProfesorById(Long.parseLong(prof)).get();
+		Long dptoId = profEntity.getDepartamento().getId();
+		
+		profEntity.setDepartamento(null);
+		
+		profesorService.actualizarProfesor(profEntity);
+		
+		return "redirect:/departments/profesores?dpto="+dptoId;
+		
+	}
 	
 }

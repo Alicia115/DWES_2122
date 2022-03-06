@@ -25,7 +25,7 @@
 				<li  sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white" th:href="@{/about}" th:text="#{menu.about}"></a></li>
 				<li  sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white" th:href="@{/alumnos/}" th:text="#{menu.students}"></a></li>
 				<li  sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores/}" th:text="#{menu.profesor}"></a></li>
-				<li  sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores/add}" th:text="#{menu.addprofesor}"></a></li>
+				<li  sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores/add}" th:text="#{menu.addprof}"></a></li>
 				<li  sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white" th:href="@{/grados/}" th:text="#{menu.grados}"></a></li>
 				<li  sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white" th:href="@{/grados/add}" th:text="#{menu.addgrados}"></a></li>
 				<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/logout}"><i class="bi bi-box-arrow-left"></i></a></li>

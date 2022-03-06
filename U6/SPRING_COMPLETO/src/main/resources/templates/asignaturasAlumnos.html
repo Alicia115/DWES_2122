@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='Asignaturas')"></head>
+<head th:replace="fragments/bootstrap::head(title='menu.students')"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>		
 			<div class="col-8">
-				<h4 class="text-center mt-3" th:text="'Alumnos de:'+ ${asignatura.getNombre()}"></h4>
+				<h4 class="text-center mt-3" th:text="|#{alumnOf}: ${asignatura.nombre}|"></h4>
 				<table class="table table-stripped table-hover mt-5">
 					<thead class="table-light">
 					<tr>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='Asignaturas del alumno')"></head>
+<head th:replace="fragments/bootstrap::head(title='menu.asigAlumn')"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>			
 			<div class="col-8">
-				<h3 class="text-center mt-3" th:text="'Matricula de: '+${alumno.nombre}+' '+${alumno.apellido1}"></h3>
+				<h3 class="text-center mt-3"  th:text="|#{matricula} ${alumno.nombre} ${alumno.apellido1} ${alumno.apellido2}|"></h3>
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 					<tr>

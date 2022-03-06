@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<head th:replace="fragments/bootstrap::head(title='Profesores')"></head>
+<head th:replace="fragments/bootstrap::head(title='menu.profesor')"></head>
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>
 			<div class="row mt-3 justify-content-end">
-            	<a class="text-center col-2 btn btn-primary" th:href="@{/profesores/add}" th:text="#{addProfesor}"></a>
+            	<a class="text-center col-2 btn btn-primary" th:href="@{/profesores/add}" th:text="#{menu.addprof}"></a>
             </div>
 			<div class="col-8">
 				<h1 class="text-center" th:text="#{list.profesor}"></h1>
@@ -24,6 +24,7 @@
 							<th th:text="#{sex}"></th>
 							<th th:text="#{department}"></th>
 							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -38,8 +39,10 @@
 							<td th:text="${p.getFechaNacimiento()}"></td>
 							<td th:text="${p.getCiudad()}"></td>
 							<td th:text="${p.getSexo()}"></td>
-							<td th:text="${p.getDepartamento().getNombre()}"></td>
+							<td th:if="${p.getDepartamento()!=null}" th:text="${p.getDepartamento().getNombre()}"></td>
+							<td th:if="${p.getDepartamento()==null}" th:text="#{noDepartment}"></td>
 							<td><a th:href="@{'/profesores/edit?prof='+${p.getId()}}"><i class="bi bi-pen-fill"></i></a></td>
+							<td><a th:href="@{'/profesores/asignaturas?prof='+${p.getId()}}"><i class="bi bi-eye-fill"></i></a></td>
 						</tr>
 					</tbody>
 				</table>

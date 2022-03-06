@@ -101,4 +101,22 @@ public class ProfesorController {
 	}
 	
 	
+	@GetMapping("/asignaturas")
+	public String profesoresAsignatura(
+			@RequestParam(required=false,name="prof") String prof,
+			Model model) {
+		
+		Optional<Profesor> profEntity = profesorService.findProfesorById(Long.parseLong(prof));
+		
+		if (prof==null || profEntity == null) {
+			return "redirect:/";
+		}
+		
+		model.addAttribute("profesor", profEntity);		
+		
+		return "asignaturasProfesor";
+	}
+	
+	
+	
 }

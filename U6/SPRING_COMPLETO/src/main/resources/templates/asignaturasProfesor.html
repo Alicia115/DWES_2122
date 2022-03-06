@@ -5,10 +5,8 @@
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>		
-			<div class="row mt-3 justify-content-end">
-            	<a class="text-center col-2 btn btn-primary" th:href="@{/asignaturas/add}" th:text="#{menu.addSubject}"> </a>
-            </div>	
 			<div class="col-8">
+			<h4 class="text-center mt-3" th:text="|#{profOf}: ${profesor.nombre} ${profesor.apellido1} ${profesor.apellido2}|"></h4>
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 					<tr>
@@ -18,24 +16,20 @@
 						<th th:text="#{course}">Curso</th>
 						<th th:text="#{type}">Tipo</th>
 						<th th:text="#{quarter}">Cuatrimestre</th>
-						<th th:text="#{profesor}">Profesor</th>
 						<th th:text="#{grade}"></th>
 						<th></th>
 						<th></th>
 					</tr>
 					</thead>					
 					<tbody>
-					 <tr th:each="a : ${asignaturas}">
+					 <tr th:each="a : ${profesor.getAsignaturas()}">
 					 	<td th:text="${a.getId()}"></td>
 					 	<td th:text="${a.getNombre()}"></td>
 					 	<td th:text="${a.getCreditos()}"></td>
 					 	<td th:text="${a.getCurso()}"></td>
 					 	<td th:text="${a.getTipo()}"></td>
 					 	<td th:text="${a.getCuatrimestre()}"></td>
-					 	<td th:text="(${a.profesor} != null) ? |${a.profesor.nombre} ${a.profesor.apellido1}| : '' "></td>
 					 	<td th:text="${a.getGrado().getNombre()}"></td>
-					 	<td><a th:href="@{'/asignaturas/alumnos?codigo='+${a.getId()}}"><i class="bi bi-people"></i></a></td>
-					 	<td><a th:href="@{'/asignaturas/edit?asig='+${a.getId()}}"><i class="bi bi-pen-fill"></i></a></td>
 					 </tr>					
 					</tbody>
 				</table>
