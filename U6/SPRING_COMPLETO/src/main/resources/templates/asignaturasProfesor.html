@@ -6,7 +6,7 @@
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>		
 			<div class="col-8">
-			<h4 class="text-center mt-3" th:text="|#{profOf}: ${profesor.nombre} ${profesor.apellido1} ${profesor.apellido2}|"></h4>
+			<h4 class="text-center mt-3" th:text="|#{asigOf}: ${profesores.nombre} ${profesores.apellido1} ${profesores.apellido2}|"></h4>
 				<table class="table table-stripped table-hover">
 					<thead class="table-light">
 					<tr>
@@ -18,11 +18,10 @@
 						<th th:text="#{quarter}">Cuatrimestre</th>
 						<th th:text="#{grade}"></th>
 						<th></th>
-						<th></th>
 					</tr>
 					</thead>					
 					<tbody>
-					 <tr th:each="a : ${profesor.getAsignaturas()}">
+					 <tr th:each="a : ${profesores.getAsignaturas()}">
 					 	<td th:text="${a.getId()}"></td>
 					 	<td th:text="${a.getNombre()}"></td>
 					 	<td th:text="${a.getCreditos()}"></td>
@@ -30,6 +29,7 @@
 					 	<td th:text="${a.getTipo()}"></td>
 					 	<td th:text="${a.getCuatrimestre()}"></td>
 					 	<td th:text="${a.getGrado().getNombre()}"></td>
+					 	<td><a th:href="@{|/asignaturas/delete?asig=${a.getId()}}|"><i class="bi bi-x-square"></i></a></td>
 					 </tr>					
 					</tbody>
 				</table>

@@ -113,5 +113,4 @@ public class DepartamentoController {
 		return "redirect:/departments/profesores?dpto="+dptoId;
 		
 	}
-	
 }

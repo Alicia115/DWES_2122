@@ -6,8 +6,10 @@ import java.util.Optional;
 
 import org.iesalixar.servidor.dto.DepartamentoDTO;
 import org.iesalixar.servidor.dto.ProfesorDTO;
+import org.iesalixar.servidor.model.Asignatura;
 import org.iesalixar.servidor.model.Departamento;
 import org.iesalixar.servidor.model.Profesor;
+import org.iesalixar.servidor.services.AsignaturaServiceImpl;
 import org.iesalixar.servidor.services.DepartamentoServiceImpl;
 import org.iesalixar.servidor.services.ProfesorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class ProfesorController {
 	
 	@Autowired
 	DepartamentoServiceImpl departService;
+	
+	@Autowired
+	AsignaturaServiceImpl asigService;
 	
 	@GetMapping("/")
 	public String profesores(Model model) {
@@ -106,17 +111,34 @@ public class ProfesorController {
 			@RequestParam(required=false,name="prof") String prof,
 			Model model) {
 		
-		Optional<Profesor> profEntity = profesorService.findProfesorById(Long.parseLong(prof));
+		Optional<Profesor> profesores = profesorService.findProfesorById(Long.parseLong(prof));
 		
-		if (prof==null || profEntity == null) {
+		if (prof==null || profesores == null) {
 			return "redirect:/";
 		}
 		
-		model.addAttribute("profesor", profEntity);		
+		model.addAttribute("profesores", profesores.get());		
 		
 		return "asignaturasProfesor";
 	}
 	
+	@GetMapping("/asignaturas/delete")
+	public String borrarAsignaturaProfesor(			
+			@RequestParam(required=false,name="asig") String asig,
+			Model model) {
+		
+		Asignatura asigEntity = asigService.findAsignaturaById(Long.parseLong(asig)).get();
+		System.out.println(asigEntity);
+		
+		Long profId = asigEntity.getProfesor().getId();
+		
+		asigEntity.setProfesor(null);
+		
+		asigService.actualizarAsignatura(asigEntity);
+		
+		return "redirect:/asignaturas?prof="+profId;
+		
+	}
 	
 	
 }
