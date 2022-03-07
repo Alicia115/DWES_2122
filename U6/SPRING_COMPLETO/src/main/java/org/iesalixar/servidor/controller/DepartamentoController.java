@@ -3,7 +3,11 @@ package org.iesalixar.servidor.controller;
 import java.util.List;
 
 import org.iesalixar.servidor.dto.DepartamentoDTO;
+import org.iesalixar.servidor.dto.DepartamentoProfesorDTO;
+import org.iesalixar.servidor.dto.GradoAsignaturaDTO;
+import org.iesalixar.servidor.model.Asignatura;
 import org.iesalixar.servidor.model.Departamento;
+import org.iesalixar.servidor.model.Grado;
 import org.iesalixar.servidor.model.Profesor;
 import org.iesalixar.servidor.services.DepartamentoServiceImpl;
 import org.iesalixar.servidor.services.ProfesorServiceImpl;
@@ -113,4 +117,40 @@ public class DepartamentoController {
 		return "redirect:/departments/profesores?dpto="+dptoId;
 		
 	}
+	
+	@GetMapping("/departments/addprofesor")
+	public String addProfDepartGet(@RequestParam(required=false,name="error") String error, @RequestParam(required=false,name="id_depart") String id_depart, Model model) {
+		
+		DepartamentoProfesorDTO profDepart = new DepartamentoProfesorDTO();
+		List<Departamento> departamentos = departamentoService.getAllDepartments();
+		List<Profesor> profesores = profesorService.getAllProfesores();
+		model.addAttribute("profDepart", profDepart);
+		model.addAttribute("departamentos", departamentos);
+		model.addAttribute("profesores", profesores);
+		model.addAttribute("error",error);
+		if(id_depart!=null) {
+			model.addAttribute("id_depart", id_depart);
+		}
+		return "addProfDepartamento";
+	}
+	
+	@PostMapping("/departments/addprofesor")
+	public String addProfDepartPost(@ModelAttribute DepartamentoProfesorDTO profDepart,Model model) {
+		
+		Departamento departamento = departamentoService.findDepartamentoById(profDepart.getId_departamento());
+		Profesor profesor = profesorService.findProfesorById(profDepart.getId_profesor()).get();
+		
+		if(departamento != null && profesor != null) {
+			
+			profesor.setDepartamento(departamento);
+			profesorService.actualizarProfesor(profesor);
+			
+			return "redirect:/departments/profesores?dpto="+departamento.getId();
+
+		} else {	
+			return "redirect:/departments/addprofesor";
+		}
+
+	}
+	
 }

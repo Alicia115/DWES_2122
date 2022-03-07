@@ -136,7 +136,7 @@ public class ProfesorController {
 		
 		asigService.actualizarAsignatura(asigEntity);
 		
-		return "redirect:/asignaturas?prof="+profId;
+		return "redirect:../asignaturas?prof="+profId;
 		
 	}
 	

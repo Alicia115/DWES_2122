@@ -29,7 +29,7 @@
 					 	<td th:text="${a.getTipo()}"></td>
 					 	<td th:text="${a.getCuatrimestre()}"></td>
 					 	<td th:text="${a.getGrado().getNombre()}"></td>
-					 	<td><a th:href="@{|/asignaturas/delete?asig=${a.getId()}}|"><i class="bi bi-x-square"></i></a></td>
+					 	<td><a th:href="@{|./asignaturas/delete?asig=${a.getId()}}|"><i class="bi bi-x-square"></i></a></td>
 					 </tr>					
 					</tbody>
 				</table>

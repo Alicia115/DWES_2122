@@ -5,6 +5,9 @@
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
 			<header th:insert="fragments/parts::menu"></header>
+			<div class="row mt-3 justify-content-end">
+            	<a class="text-center col-2 btn btn-primary" th:href="@{/grados/add}" th:text="#{menu.addgrados}"></a>
+            </div>	
 			<h1 class="text-center mt-3" th:text="#{menu.grados}"></h1>
 			<div class="col-8">
 				<table class="table table-stripped table-hover">
@@ -13,6 +16,7 @@
 						<th>ID</th>
 						<th th:text="#{name}"></th>
 						<th></th>
+						<th></th>
 					</tr>
 					</thead>					
 					<tbody>
@@ -20,6 +24,7 @@
 					 	<td th:text="${g.getId()}"></td>
 					 	<td th:text="${g.getNombre()}"></td>
 					 	<td><a th:href="@{'/grados/edit?grado='+${g.getId()}}"><i class="bi bi-pen-fill"></i></a></td>
+					 	<td><a th:href="@{'/grados/asignaturas?codigo='+${g.getId()}}"><i class="bi bi-eye-fill"></i></i></a></td>
 					 </tr>					
 					</tbody>
 				</table>
