@@ -15,11 +15,11 @@
                                ></option>
                     </select>	
 					<label for="departamento" class="form-label mt-3" th:text="#{menu.departments}"></label>
-					<select name="departamento" class="form-select mt-3"  th:field="id_departamento=*{id_departamento}">
+					<select name="departamento" class="form-select mt-3"  th:field="*{id_departamento}">
                                 <option th:each="d : ${departamentos}" 
                                 th:value="${d.id} " 
                                 th:text="${d.nombre}" 
-                                th:selected="${id_depart}==${d.id}"
+                                th:selected="(${id_depart} == ${d.id})"
                                ></option>
                     </select>					
 					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorDepartment'}"></h6>	

@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.iesalixar.servidor.dto.DepartamentoDTO;
+import org.iesalixar.servidor.dto.GradoAsignaturaDTO;
+import org.iesalixar.servidor.dto.ProfesorAsignaturaDTO;
 import org.iesalixar.servidor.dto.ProfesorDTO;
 import org.iesalixar.servidor.model.Asignatura;
 import org.iesalixar.servidor.model.Departamento;
+import org.iesalixar.servidor.model.Grado;
 import org.iesalixar.servidor.model.Profesor;
 import org.iesalixar.servidor.services.AsignaturaServiceImpl;
 import org.iesalixar.servidor.services.DepartamentoServiceImpl;
@@ -140,5 +143,41 @@ public class ProfesorController {
 		
 	}
 	
+	@GetMapping("/addasignatura")
+	public String addAsigProfesorGet(@RequestParam(required=false,name="error") String error, @RequestParam(required=false,name="id_prof") String id_prof,Model model) {
+		
+		ProfesorAsignaturaDTO asigProf = new ProfesorAsignaturaDTO();
+		List<Asignatura> asignaturas = asigService.getAllAsignaturas();
+		List<Profesor> profesores = profesorService.getAllProfesores();
+		model.addAttribute("asigProf",asigProf);
+		model.addAttribute("asignaturas",asignaturas);
+		model.addAttribute("profesores",profesores);
+		model.addAttribute("error",error);
+		if(id_prof!=null) {
+			model.addAttribute("id_prof", id_prof);
+		}
+		return "addAsigProfesor";
+	}
+	
+	
+	@PostMapping("/addasignatura")
+	public String addAsigProfesorPost(@ModelAttribute ProfesorAsignaturaDTO asigProf,Model model) {
+		
+		Profesor profesor = profesorService.findProfesorById(asigProf.getId_profesor()).get();
+		Asignatura asig = asigService.findAsignaturaById(asigProf.getId_asignatura()).get();
+		System.out.println(asigProf.getId_profesor());
+		
+		if(profesor != null && asig != null) {
+			
+			asig.setProfesor(profesor);
+			asigService.actualizarAsignatura(asig);
+			
+			return "redirect:./asignaturas?prof="+profesor.getId();
+
+		} else {	
+			return "redirect:./addasignatura/";
+		}
+
+	}
 	
 }
