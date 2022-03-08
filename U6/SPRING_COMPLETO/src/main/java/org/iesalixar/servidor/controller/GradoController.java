@@ -102,7 +102,7 @@ public class GradoController {
 	}
 	
 	@GetMapping("/grados/addasignatura")
-	public String addAsigGradoGet(@RequestParam(required=false,name="error") String error, Model model) {
+	public String addAsigGradoGet(@RequestParam(required=false,name="error") String error, @RequestParam(required=false,name="id_grad") String id_grad,Model model) {
 		
 		GradoAsignaturaDTO asigGrado = new GradoAsignaturaDTO();
 		List<Asignatura> asignaturas = asigService.getAllAsignaturas();
@@ -111,6 +111,9 @@ public class GradoController {
 		model.addAttribute("asignaturas",asignaturas);
 		model.addAttribute("grados",grados);
 		model.addAttribute("error",error);
+		if(id_grad!=null) {
+			model.addAttribute("id_grad", id_grad);
+		}
 		return "addAsigGrado";
 	}
 	

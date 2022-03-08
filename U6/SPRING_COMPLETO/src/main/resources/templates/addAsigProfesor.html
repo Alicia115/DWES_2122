@@ -14,8 +14,8 @@
                                 th:text="${a.nombre}" 
                                ></option>
                     </select>	
-					<label for="profesor" class="form-label mt-3" th:text="#{menu.profesor}"></label>
-					<select name="profesor" class="form-select mt-3"  th:field="*{id_profesor}">
+					<label for="id_profesor" class="form-label mt-3" th:text="#{menu.profesor}"></label>
+					<select name="id_profesor" class="form-select mt-3">
                                 <option th:each="p : ${profesores}" 
                                 th:value="${p.id} " 
                                 th:text="|${p.nombre} ${p.apellido1} ${p.apellido2}|"
