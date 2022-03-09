@@ -8,6 +8,8 @@
 			<div class="row mt-3 justify-content-end">
             	<a class="text-center col-2 btn btn-primary" th:href="@{/departments/add}" th:text="#{menu.adddpto}"> </a>
             </div>	
+            <h6 class="text-success" th:if="${correctoadd!=null}" th:text="#{'addDepartment'}"></h6>
+            <h6 class="text-success" th:if="${correctoupdate!=null}" th:text="#{'updateDepartment'}"></h6>
 			<h1 class="text-center mt-3" th:text="#{menu.departments}"></h1>
 			<div class="col-8">
 				<table class="table table-stripped table-hover">

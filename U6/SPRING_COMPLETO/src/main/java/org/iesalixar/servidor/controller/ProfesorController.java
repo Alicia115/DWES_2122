@@ -112,6 +112,7 @@ public class ProfesorController {
 	@GetMapping("/asignaturas")
 	public String profesoresAsignatura(
 			@RequestParam(required=false,name="prof") String prof,
+			@RequestParam(required=false,name="correcto") String correcto,
 			Model model) {
 		
 		Optional<Profesor> profesores = profesorService.findProfesorById(Long.parseLong(prof));
@@ -121,6 +122,9 @@ public class ProfesorController {
 		}
 		
 		model.addAttribute("profesores", profesores.get());		
+		if(correcto!=null) {
+            model.addAttribute("correcto", correcto);
+        }
 		
 		return "asignaturasProfesor";
 	}
@@ -139,7 +143,7 @@ public class ProfesorController {
 		
 		asigService.actualizarAsignatura(asigEntity);
 		
-		return "redirect:../asignaturas?prof="+profId;
+		return "redirect:../asignaturas?prof="+profId+"&correcto=deleteAsigProf";
 		
 	}
 	

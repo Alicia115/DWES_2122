@@ -1,5 +1,6 @@
 package org.iesalixar.servidor.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,8 +106,17 @@ public class GradoController {
 	public String addAsigGradoGet(@RequestParam(required=false,name="error") String error, @RequestParam(required=false,name="id_grad") String id_grad,Model model) {
 		
 		GradoAsignaturaDTO asigGrado = new GradoAsignaturaDTO();
-		List<Asignatura> asignaturas = asigService.getAllAsignaturas();
 		List<Grado> grados = gradoService.getAllGrados();
+		//Si son todas las asignaturas independientemente de si es null cambiar esta lista por "asignaturas".
+		List<Asignatura> asignaturasPrev = asigService.getAllAsignaturas();
+		//Si son todas las asignaturas independientemente de si es null, comentar de la lista hasta el final del for
+        List<Asignatura> asignaturas = new ArrayList<>();
+        for(int i=0; i<asignaturasPrev.size(); i++) {
+            Asignatura asignatura = asignaturasPrev.get(i);
+            if(asignatura.getGrado()==null) {
+                asignaturas.add(asignatura);
+            }
+        }
 		model.addAttribute("asigGrado",asigGrado);
 		model.addAttribute("asignaturas",asignaturas);
 		model.addAttribute("grados",grados);

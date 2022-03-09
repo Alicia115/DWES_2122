@@ -1,6 +1,8 @@
 package org.iesalixar.servidor.dto;
 
-public class ProfesorAsignaturaDTO {
+import java.io.Serializable;
+
+public class ProfesorAsignaturaDTO implements Serializable{
 
 	private Long id_asignatura;
 	private Long id_profesor;

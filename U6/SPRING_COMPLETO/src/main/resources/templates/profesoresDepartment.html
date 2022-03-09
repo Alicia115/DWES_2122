@@ -7,7 +7,9 @@
 			<header th:insert="fragments/parts::menu"></header>	
 			<div class="row mt-3 justify-content-end">
             	<a class="text-center col-2 btn btn-primary" th:href="@{|/departments/addprofesor?id_depart=${departamento.id}}|" th:text="#{menu.addprofDepart}"> </a>
-            </div>			
+            </div>	
+            <h6 class="text-success" th:if="${correcto!=null}" th:text="|#{deleteProfDepart} ${departamento.getNombre()}|"></h6>
+            <h6 class="text-success" th:if="${correctoaddProf!=null}" th:text="#{'correctAddProfDepart'}"></h6>			
 			<div class="col-8">
 				<h4 class="text-center mt-3" th:text="|#{profOf}: ${departamento.getNombre()}|"></h4>
 				<table class="table table-stripped table-hover mt-5">
@@ -15,12 +17,14 @@
 					<tr>
 						<th>ID</th>
 						<th>NIF</th>
-						<th>Nombre</th>
-						<th>Primer Apellido</th>
-						<th>Segundo Apellido</th>
-						<th>Fecha de Nacimiento</th>
-						<th>Ciudad</th>
-						<th>Sexo</th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{firstName}"></th>
+						<th th:text="#{secondName}"></th>
+						<th th:text="#{direction}"></th>
+						<th th:text="#{phoneNumber}"></th>
+						<th th:text="#{dateBirthady}"></th>
+						<th th:text="#{city}"></th>
+						<th th:text="#{sex}"></th>
 						<th></th>
 					</tr>
 					</thead>					
@@ -31,6 +35,8 @@
 					 	<td th:text="${p.getNombre()}"></td>
 					 	<td th:text="${p.getApellido1()}"></td>
 					 	<td th:text="${p.getApellido2()}"></td>
+					 	<td th:text="${p.getDireccion()}"></td>
+					 	<td th:text="${p.getTelefono()}"></td>
 					 	<td th:text="${p.getFechaNacimiento()}"></td>
 					 	<td th:text="${p.getCiudad()}"></td>
 					 	<td th:text="${p.getSexo()}"></td>

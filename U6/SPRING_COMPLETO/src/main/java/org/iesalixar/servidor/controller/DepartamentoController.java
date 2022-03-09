@@ -30,11 +30,19 @@ public class DepartamentoController {
 	ProfesorServiceImpl profesorService;
 	
 	@RequestMapping("/departments")
-	public String departaments(Model model) {
+	public String departaments(Model model,
+			@RequestParam(required=false,name="correctoadd") String correctoadd,
+			@RequestParam(required=false,name="correctoupdate") String correctoupdate){
 		
 		List<Departamento> departamentos = departamentoService.getAllDepartments();
 		
 		model.addAttribute("departamentos",departamentos);
+		if(correctoadd!=null) {
+            model.addAttribute("correctoadd", correctoadd);
+        }
+		if(correctoupdate!=null) {
+            model.addAttribute("correctoupdate", correctoupdate);
+        }
 		return "departments";
 	}
 	
@@ -62,7 +70,7 @@ public class DepartamentoController {
 			return "redirect:/departments/add?error=Existe&dpto="+dpto.getNombre();
 		}
 		
-		return "redirect:/departments";
+		return "redirect:/departments?correctoadd=addDepartment";
 	}
 	
 	@GetMapping("/departments/edit")
@@ -81,13 +89,15 @@ public class DepartamentoController {
 		if (departamentoService.actualizarDepartamento(dpto)==null) {
 			return "redirect:/departments/edit?error=error&dpto"+dpto.getId();
 		}
-		return "redirect:/departments";
+		return "redirect:/departments?correctoupdate=updateDepartment";
 	}
 	
 	
 	@GetMapping("/departments/profesores")
 	public String profesoresDepartamento(
 			@RequestParam(required=false,name="dpto") String dpto,
+			@RequestParam(required=false,name="correcto") String correcto,
+			@RequestParam(required=false,name="correctoaddProf") String correctoaddProf,
 			Model model) {
 		
 		Departamento dptoEntity = departamentoService.findDepartamentoById(Long.parseLong(dpto));
@@ -96,7 +106,13 @@ public class DepartamentoController {
 			return "redirect:/departments";
 		}
 		
-		model.addAttribute("departamento", dptoEntity);		
+		model.addAttribute("departamento", dptoEntity);	
+		if(correcto!=null) {
+            model.addAttribute("correcto", correcto);
+        }
+		if(correctoaddProf!=null) {
+            model.addAttribute("correctoaddProf", correctoaddProf);
+        }
 		
 		return "profesoresDepartment";
 	}
@@ -114,7 +130,7 @@ public class DepartamentoController {
 		
 		profesorService.actualizarProfesor(profEntity);
 		
-		return "redirect:/departments/profesores?dpto="+dptoId;
+		return "redirect:/departments/profesores?dpto="+dptoId+"&correcto=deleteProfDepart";
 		
 	}
 	
@@ -145,10 +161,10 @@ public class DepartamentoController {
 			profesor.setDepartamento(departamento);
 			profesorService.actualizarProfesor(profesor);
 			
-			return "redirect:/departments/profesores?dpto="+departamento.getId();
+			return "redirect:/departments/profesores?dpto="+departamento.getId()+"&correctoaddProf=correctAddProfDepart";
 
 		} else {	
-			return "redirect:/departments/addprofesor";
+			return "redirect:/departments/addprofesor?error=errorAddProfDepart";
 		}
 
 	}

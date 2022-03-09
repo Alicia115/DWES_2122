@@ -2,27 +2,28 @@ package org.iesalixar.servidor.dto;
 
 import java.io.Serializable;
 
-public class GradoAsignaturaDTO implements Serializable{
+public class AlumnoAsignaturaDTO implements Serializable {
 	
 	private Long id_asignatura;
-	private Long id_grado;
+	private Long id_alumno;
 	
-	
-	public GradoAsignaturaDTO() {
-		
+	public AlumnoAsignaturaDTO() {
 	}
-	
+
 	public Long getId_asignatura() {
 		return id_asignatura;
 	}
+
 	public void setId_asignatura(Long id_asignatura) {
 		this.id_asignatura = id_asignatura;
 	}
-	public Long getId_grado() {
-		return id_grado;
+
+	public Long getId_alumno() {
+		return id_alumno;
 	}
-	public void setId_grado(Long id_grado) {
-		this.id_grado = id_grado;
+
+	public void setId_alumno(Long id_alumno) {
+		this.id_alumno = id_alumno;
 	}
 
 }

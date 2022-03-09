@@ -32,7 +32,8 @@
 					 	<td th:text="${a.alumno.getFechaNacimiento()}"></td>
 					 	<td th:text="${a.alumno.getCiudad()}"></td>
 					 	<td th:text="${a.alumno.getSexo()}"></td>
-					 	<td th:text="${a.nota}"></td>					 	
+					 	<td th:text="${a.nota}"></td>
+					 	<td><a th:href="@{|/asignaturas/alumnos/delete?asig=${asignatura.id}&alumn=${a.alumno.id}}|"><i class="bi bi-x-square"></i></a></td>					 	
 					 </tr>					
 					</tbody>
 				</table>

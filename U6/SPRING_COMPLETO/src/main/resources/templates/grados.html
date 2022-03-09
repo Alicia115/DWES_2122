@@ -10,7 +10,7 @@
             </div>	
 			<h1 class="text-center mt-3" th:text="#{menu.grados}"></h1>
 			<div class="col-8">
-				<table class="table table-stripped table-hover">
+				<table class="table table-stripped table-hover"  th:if="${grados.size()>0}">
 					<thead class="table-light">
 					<tr>
 						<th>ID</th>
@@ -29,7 +29,9 @@
 					</tbody>
 				</table>
 			</div>
-
+				<div th:if="${grados.size()==0}" class="alert alert-warning mt-5" role="alert">
+                      <h6 class="text-danger text-center" th:text="#{'noGrado'}"></h6>
+                </div>
 			<footer th:replace="fragments/parts::footer(info='menu.grados')"></footer>
 		</div>
 	</div>

@@ -13,7 +13,7 @@
 					<label for="nombre" class="form-label mt-3" th:text="#{name}"></label>
 					<input type="text" class="form-control" id="nombre" name="nombre"
 						th:field="*{nombre}" required>						
-					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorDepartment'}"></h6>	
+					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorUpdateDepart'}"></h6>	
 					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{update}"> </button>
 				</form>
 			</div>

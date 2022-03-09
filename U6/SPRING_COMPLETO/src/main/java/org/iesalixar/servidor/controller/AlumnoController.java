@@ -1,14 +1,21 @@
 package org.iesalixar.servidor.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.iesalixar.servidor.dto.AlumnoAsignaturaDTO;
 import org.iesalixar.servidor.dto.AlumnoDTO;
+import org.iesalixar.servidor.dto.AsignaturaAlumnoDTO;
+import org.iesalixar.servidor.dto.GradoAsignaturaDTO;
 import org.iesalixar.servidor.dto.ProfesorDTO;
 import org.iesalixar.servidor.model.Alumno;
+import org.iesalixar.servidor.model.Asignatura;
 import org.iesalixar.servidor.model.Departamento;
+import org.iesalixar.servidor.model.Grado;
 import org.iesalixar.servidor.model.Profesor;
 import org.iesalixar.servidor.services.AlumnoServiceImpl;
+import org.iesalixar.servidor.services.AsignaturaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +31,9 @@ public class AlumnoController {
 
 	@Autowired
 	AlumnoServiceImpl alumnoService;
+	
+	@Autowired
+	AsignaturaServiceImpl asigService;
 
 	@GetMapping("/")
 	public String alumnos(Model model) {
@@ -49,45 +59,58 @@ public class AlumnoController {
 		return "alumnosAsignaturas";
 	}
 	
-	
 	/*
-	@GetMapping("/add")
-	public String alumnosInsertarGet(@RequestParam(required=false,name="error") String error,
-			@RequestParam(required=false,name="alumno") String alumno,
-			Model model) {
+	@GetMapping("/addasignaturaalumno")
+	public String addAsigAlumnoGet(@RequestParam(required=false,name="error") String error, @RequestParam(required=false,name="id_alum") String id_alum,Model model) {
 		
-		AlumnoDTO alumnoDTO = new AlumnoDTO();
-		model.addAttribute("alumno", alumnoDTO);
-		model.addAttribute("error", error);
-		return "addAlumno";
+		AlumnoAsignaturaDTO asigAlumn= new AlumnoAsignaturaDTO();
+		List<Alumno> alumnos = alumnoService.getAllAlumnos();
+		List<Asignatura> asignaturas = asigService.getAllAsignaturas();
 		
+		model.addAttribute("asigAlumn",asigAlumn);
+		model.addAttribute("asignaturas",asignaturas);
+		model.addAttribute("alumnos",alumnos);
+		model.addAttribute("error",error);
+		if(id_alum!=null) {
+			model.addAttribute("id_alum", id_alum);
+		}
+		return "addAsignaturaAlumno";
 	}
 	
-	@PostMapping("/add")
-	public String alumnosInsertarPost(@ModelAttribute AlumnoDTO alumnoDTO,Model model) {
+	
+	@PostMapping("/addasignaturaalumno")
+	public String addAsigAlumnoPost(@ModelAttribute AlumnoAsignaturaDTO asigAlumn,Model model) {
 		
-		if(alumnoService.findAlumnoByNif(alumnoDTO.getNif())==null) {
-			Alumno alumn = new Alumno();		
-			alumn.setNif(alumnoDTO.getNif());
-			alumn.setNombre(alumnoDTO.getNombre());
-			alumn.setApellido1(alumnoDTO.getApellido1());
-			alumn.setApellido2(alumnoDTO.getApellido2());
-			alumn.setCiudad(alumnoDTO.getCiudad());
-			alumn.setDireccion(alumnoDTO.getDireccion());
-			alumn.setFechaNacimiento(alumnoDTO.getFechaNacimiento());
-			alumn.setSexo(alumnoDTO.getSexo());
-			alumn.setTelefono(alumnoDTO.getTelefono());
+		Alumno alumno = alumnoService.findAlumnoById(asigAlumn.getId_alumno()).get();
+		Asignatura asig = asigService.findAsignaturaById(asigAlumn.getId_asignatura()).get();
+		
+		if(grado != null && asig != null) {
 			
-			if (alumnoService.insertarAlumno(alumn)==null) {
-				return "redirect:/alumnos/add?error=Existe&alumno="+alumnoDTO.getNombre();
-			}else {
-				return "redirect:/alumnos/";					
-			}
-		}else {
-			return "redirect:/alumnos/add?error=ExisteNif&alumno="+alumnoDTO.getNif();
+			asig.setGrado(grado);
+			asigService.actualizarAsignatura(asig);
+			
+			return "redirect:/grados/asignaturas?codigo="+grado.getId();
+
+		} else {	
+			return "redirect:/grados/addasignatura/";
 		}
-		
-	}*/
+	}
+	*/
+	
+	@GetMapping("/asignaturas/delete")
+    public String asignaturaAlumnoDelete(@RequestParam(required=true, name="asig") String asig,
+            @RequestParam(required=true, name="alumn") String alumn){
+
+        Asignatura asignatura = asigService.findAsignaturaById(Long.parseLong(asig)).get();
+        if(asignatura !=null) {
+            Alumno alumno = alumnoService.findAlumnoById(Long.parseLong(alumn)).get();
+            asignatura.removeNota(alumno);
+            asigService.actualizarAsignatura(asignatura);
+            return "redirect:/alumnos/asignaturas?codigo="+alumn;
+        }else {
+            return "redirect:/alumnos/";
+        }
+    }
 	
 	@GetMapping("/edit")
 	public String editAlumn(@RequestParam(name="alumn") String alumn,Model model) {

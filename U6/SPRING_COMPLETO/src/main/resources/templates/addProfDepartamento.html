@@ -22,9 +22,9 @@
                                 th:selected="(${id_depart} == ${d.id})"
                                ></option>
                     </select>					
-					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorDepartment'}"></h6>	
+					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorAddProfDepart'}"></h6>	
 					
-					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{update}"> </button>		
+					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{add}"> </button>		
 				</form>
 			</div>
 			<footer th:replace="fragments/parts::footer(info='menu.addprofDepart')"></footer>

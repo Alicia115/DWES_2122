@@ -36,8 +36,8 @@ public class AsignaturaController {
 	@Autowired
 	GradoServiceImpl gradoService;
 	
-	//@Autowired
-	//AlumnoServiceImpl alumService;
+	@Autowired
+	AlumnoServiceImpl alumService;
 	
 	@GetMapping("/") 
 	public String asignaturas(Model model) {
@@ -59,6 +59,22 @@ public class AsignaturaController {
 		model.addAttribute("asignatura",asignatura.get());				
 		return "asignaturasAlumnos";
 	}
+	
+	@GetMapping("/alumnos/delete")
+    public String asignaturaAlumnoDelete(@RequestParam(required=true, name="asig") String asig,
+            @RequestParam(required=true, name="alumn") String alumn){
+
+        Asignatura asignatura = asignaturaService.findAsignaturaById(Long.parseLong(asig)).get();
+        if(asignatura !=null) {
+            Alumno alumno = alumService.findAlumnoById(Long.parseLong(alumn)).get();
+            asignatura.removeNota(alumno);
+            asignaturaService.actualizarAsignatura(asignatura);
+            return "redirect:/asignaturas/alumnos?codigo="+asig;
+        }else {
+            return "redirect:/asignaturas/";
+        }
+    }
+	
 	
 	@GetMapping("/add")
 	public String addAsignaturaGet(@RequestParam(required=false,name="error") String error,
