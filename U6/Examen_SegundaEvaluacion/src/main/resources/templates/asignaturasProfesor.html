@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='menu.subjects')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>		
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="row mt-3 justify-content-end">
+            	<a class="text-center col-2 btn btn-primary" th:href="@{|/profesores/addAsignatura?id_prof=${profesores.id}}|" th:text="#{menu.asigProf}"> </a>
+            </div>	
+			<div class="col-8">
+			<h4 class="text-center mt-3" th:text="|#{asigOf}: ${profesores.nombre} ${profesores.apellido1} |"></h4>
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+					<tr>
+						<th>ID</th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{credits}">Creditos</th>
+						<th th:text="#{type}">Tipo</th>
+						<th th:text="#{course}">Curso</th>
+						<th th:text="#{quarter}">Cuatrimestre</th>
+						<th></th>
+					</tr>
+					</thead>					
+					<tbody>
+					 <tr th:each="a : ${profesores.getAsignaturas()}">
+					 	<td th:text="${a.id}"></td>
+					 	<td th:text="${a.nombre}"></td>
+					 	<td th:text="${a.creditos}"></td>
+					 	<td th:text="${a.tipo}"></td>
+					 	<td th:text="${a.curso}"></td>
+					 	<td th:text="${a.cuatrimestre}"></td>
+					 </tr>		
+					 <h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorProfNoAsig'}"></h6>			
+					</tbody>
+				</table>
+			</div>
+
+			<footer th:replace="fragments/parts::footer(info='menu.subjects')"></footer>
+		</div>
+	</div>
+</body>
+</html>

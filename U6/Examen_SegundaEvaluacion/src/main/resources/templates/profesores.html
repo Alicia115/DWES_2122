@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head th:replace="fragments/bootstrap::head(title='menu.profesor')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="row mt-3 justify-content-end">
+            	<a class="text-center col-2 btn btn-primary" th:href="@{/profesores/addProfesor}" th:text="#{menu.addprof}"></a>
+            </div>
+			<div class="col-8">
+				<br>
+				<h1 class="text-center" th:text="#{menu.profUniversity}"></h1>
+				<br>
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>NIF</th>
+							<th th:text="#{name}"></th>
+							<th th:text="#{firstName}"></th>
+							<th th:text="#{department}"></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${profesores}">
+							<td th:text="${p.getId()}"></td>
+							<td th:text="${p.getNif()}"></td>
+							<td th:text="${p.getNombre()}"></td>
+							<td th:text="${p.getApellido1()}"></td>
+							<td th:if="${p.getDepartamento()!=null}" th:text="${p.getDepartamento().getNombre()}"></td>
+							<td th:if="${p.getDepartamento()==null}" th:text="#{noDepartment}"></td>
+							<td><a th:href="@{'/profesores/asignaturas?prof='+${p.getId()}}"><i class="bi bi-eye-fill"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorNoProfesor'}"></h6>
+			</div>
+
+			<footer th:replace="fragments/parts::footer(info='menu.profesor')"></footer>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='menu.addprof')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<div class="col-6">
+				<form th:action="@{/profesores/addProfesor}" method="post"	th:object="${prof}">
+					<label for="nif" class="form-label mt-3">NIF</label>
+					<input type="text" class="form-control" id="nif" name="nif"
+						th:field="*{nif}">
+					<label for="nombre" class="form-label mt-3" th:text="#{name}"></label>
+					<input type="text" class="form-control" id="nombre" name="nombre"
+						th:field="*{nombre}" required>	
+					<label for="apellido1" class="form-label mt-3" th:text="#{firstName}"></label>
+					<input type="text" class="form-control" id="apellido1" name="apellido1"
+						th:field="*{apellido1}" required>
+					<label for="apellido2" class="form-label mt-3" th:text="#{secondName}"></label>
+					<input type="text" class="form-control" id="apellido2" name="apellido2"
+						th:field="*{apellido2}" >		
+					<label for="ciudad" class="form-label mt-3" th:text="#{city}"></label>
+					<input type="text" class="form-control" id="ciudad" name="ciudad"
+						th:field="*{ciudad}" required>		
+					<label for="direccion" class="form-label mt-3 " th:text="#{direction}"></label>
+					<input type="text" class="form-control" id="direccion" name="direccion"
+						th:field="*{direccion}" required>
+					<label for="telefono" class="form-label mt-3" th:text="#{phoneNumber}"></label>
+					<input type="text" class="form-control" id="telefono" name="telefono"
+						th:field="*{telefono}" >	
+					<label for="fecha_nacimiento" class="form-label mt-3" th:text="#{dateBirthady}"> </label>
+					<input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
+						th:field="*{fechaNacimiento}" required>	
+					<label for="sexo" class="form-label mt-3" th:text="#{sex}"></label>
+					<input type="text" class="form-control" id="sexo" name="sexos"
+						th:field="*{sexo}" required>
+					<label for="departamento" class="form-label mt-3" th:text="#{department}"></label>
+					<select name="departamento" class="form-select mt-3"  th:field="*{id_departamento}">
+                                <option th:each="d : ${departamentos}" 
+                                th:value="${d.id}" 
+                                th:text="${d.nombre}" 
+                               ></option>
+                    </select>					
+					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorProfesor'}"></h6>	
+																<!--th:text="${'Profesor existente'}-->
+					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{add}"> </button>	
+				</form>
+			</div>
+			<footer th:replace="fragments/parts::footer(info='menu.addprof')"></footer>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='menu.asigProf')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<h2 class="text-center" th:text="#{menu.asigProfeTitulo}"></h2>
+			<br>
+			<div class="col-6">
+				<form th:action="@{/profesores/addAsignatura}" method="post"	th:object="${asigProf}">
+					<label for="asignatura" class="form-label mt-3" th:text="#{menu.subjects}"></label>
+					<select name="asignatura" class="form-select mt-3"  th:field="*{id_asignatura}">
+                                <option th:each="a : ${asignaturas}" 
+                                th:value="${a.id} " 
+                                th:text="${a.nombre}" 
+                               ></option>
+                    </select>	
+					<label for="id_profesor" class="form-label mt-3" th:text="#{docente}"></label>
+					<select name="id_profesor" class="form-select mt-3">
+                                <option th:each="p : ${profesores}" 
+                                th:value="${p.id} " 
+                                th:text="|${p.nombre} ${p.apellido1}|"
+                                th:selected="(${id_prof} == ${p.id})" 
+                               ></option>
+                    </select>					
+					<h6 class="text-danger" th:if="${error!=null}" th:text="#{'errorAsigSiProf'}"></h6>	
+					
+					<button type="submit" class="btn btn-primary w-100 mt-3" th:text="#{assign}"> </button>		
+				</form>
+			</div>
+			<footer th:replace="fragments/parts::footer(info='menu.asigProfeTitulo')"></footer>
+		</div>
+	</div>
+</body>
+</html>
